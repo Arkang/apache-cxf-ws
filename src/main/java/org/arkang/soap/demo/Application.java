@@ -1,4 +1,4 @@
-package com.optumrx.soap.demo;
+package org.arkang.soap.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

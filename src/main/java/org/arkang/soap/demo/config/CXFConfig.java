@@ -1,9 +1,9 @@
-package com.optumrx.soap.demo.config;
+package org.arkang.soap.demo.config;
 
-import com.optumrx.soap.demo.service.GreetingServiceImpl;
-import com.optumrx.soap.demo.service.InfoServiceImpl;
-import com.optumrx.soap.demo.service.interceptors.AppInboundInterceptor;
-import com.optumrx.soap.demo.service.interceptors.AppOutboundInterceptor;
+import org.arkang.soap.demo.service.GreetingServiceImpl;
+import org.arkang.soap.demo.service.InfoServiceImpl;
+import org.arkang.soap.demo.service.interceptors.AppInboundInterceptor;
+import org.arkang.soap.demo.service.interceptors.AppOutboundInterceptor;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.ext.logging.LoggingFeature;

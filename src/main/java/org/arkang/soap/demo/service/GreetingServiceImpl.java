@@ -1,6 +1,6 @@
-package com.optumrx.soap.demo.service;
+package org.arkang.soap.demo.service;
 
-import com.optumrx.soap.demo.model.Greeting;
+import org.arkang.soap.demo.model.Greeting;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

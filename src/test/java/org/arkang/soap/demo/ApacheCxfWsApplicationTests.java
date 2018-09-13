@@ -1,4 +1,4 @@
-package com.optumrx.soap.demo;
+package org.arkang.soap.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.optumrx.soap.demo.service.interceptors;
+package org.arkang.soap.demo.service.interceptors;
 
 import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.interceptor.Fault;
