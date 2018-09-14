@@ -1,13 +1,15 @@
 package org.arkang.soap.demo.config;
 
-import org.arkang.soap.demo.service.GreetingServiceImpl;
-import org.arkang.soap.demo.service.InfoServiceImpl;
-import org.arkang.soap.demo.service.interceptors.AppInboundInterceptor;
-import org.arkang.soap.demo.service.interceptors.AppOutboundInterceptor;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.jaxws.EndpointImpl;
+import org.arkang.soap.demo.mapper.WelcomeMessageMapper;
+import org.arkang.soap.demo.service.GreetingServiceImpl;
+import org.arkang.soap.demo.service.InfoServiceImpl;
+import org.arkang.soap.demo.service.interceptors.AppInboundInterceptor;
+import org.arkang.soap.demo.service.interceptors.AppOutboundInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +17,9 @@ import javax.xml.ws.Endpoint;
 
 @Configuration
 public class CXFConfig {
+
+    @Autowired
+    private WelcomeMessageMapper welcomeMessageMapper;
 
     @Bean(name = Bus.DEFAULT_BUS_ID)
     public SpringBus springBus() {
@@ -26,7 +31,7 @@ public class CXFConfig {
 
     @Bean("InfoService")
     public Endpoint infoServiceEndpoint() {
-        EndpointImpl endpoint = new EndpointImpl(springBus(), new InfoServiceImpl());
+        EndpointImpl endpoint = new EndpointImpl(springBus(), new InfoServiceImpl(welcomeMessageMapper));
         endpoint.getFeatures().add(new LoggingFeature());
         endpoint.publish("/InfoService");
         return endpoint;
