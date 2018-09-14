@@ -4,9 +4,8 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.jaxws.EndpointImpl;
-import org.arkang.soap.demo.mapper.WelcomeMessageMapper;
-import org.arkang.soap.demo.service.GreetingServiceImpl;
-import org.arkang.soap.demo.service.InfoServiceImpl;
+import org.arkang.soap.demo.service.GreetingService;
+import org.arkang.soap.demo.service.InfoService;
 import org.arkang.soap.demo.service.interceptors.AppInboundInterceptor;
 import org.arkang.soap.demo.service.interceptors.AppOutboundInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,9 @@ import javax.xml.ws.Endpoint;
 public class CXFConfig {
 
     @Autowired
-    private WelcomeMessageMapper welcomeMessageMapper;
+    private InfoService infoService;
+    @Autowired
+    private GreetingService greetingService;
 
     @Bean(name = Bus.DEFAULT_BUS_ID)
     public SpringBus springBus() {
@@ -31,7 +32,7 @@ public class CXFConfig {
 
     @Bean("InfoService")
     public Endpoint infoServiceEndpoint() {
-        EndpointImpl endpoint = new EndpointImpl(springBus(), new InfoServiceImpl(welcomeMessageMapper));
+        EndpointImpl endpoint = new EndpointImpl(springBus(), infoService);
         endpoint.getFeatures().add(new LoggingFeature());
         endpoint.publish("/InfoService");
         return endpoint;
@@ -39,7 +40,7 @@ public class CXFConfig {
 
     @Bean("GreetingService")
     public Endpoint greetingServiceEndpoint() {
-        EndpointImpl endpoint = new EndpointImpl(springBus(), new GreetingServiceImpl());
+        EndpointImpl endpoint = new EndpointImpl(springBus(), greetingService);
         endpoint.getFeatures().add(new LoggingFeature());
         endpoint.publish("/GreetingService");
         return endpoint;

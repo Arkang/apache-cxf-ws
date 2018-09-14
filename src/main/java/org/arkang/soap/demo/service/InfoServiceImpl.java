@@ -3,6 +3,7 @@ package org.arkang.soap.demo.service;
 import org.arkang.soap.demo.mapper.WelcomeMessageMapper;
 import org.arkang.soap.demo.model.Greeting;
 import org.arkang.soap.demo.model.MessageResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,11 +14,8 @@ public class InfoServiceImpl implements InfoService {
 
     private static final Logger LOG = Logger.getLogger(InfoServiceImpl.class.getName());
 
+    @Autowired
     private WelcomeMessageMapper welcomeMessageMapper;
-
-    public InfoServiceImpl(WelcomeMessageMapper mapper) {
-        welcomeMessageMapper = mapper;
-    }
 
     @Override
     public Greeting sayHowAreYou(String name) {
@@ -29,8 +27,7 @@ public class InfoServiceImpl implements InfoService {
         String id = "001";
         MessageResponse response = welcomeMessageMapper.getWelcomeMessage(id);
         if (response != null) {
-            welcomeMessageMapper.updateMessageCount(10, id);
-            welcomeMessageMapper.flush();
+            welcomeMessageMapper.updateMessageCount(response.getCount() + 1, id);
             MessageResponse updatedResponse = welcomeMessageMapper.getWelcomeMessage(id);
             LOG.info("After count update: " + updatedResponse);
         }
